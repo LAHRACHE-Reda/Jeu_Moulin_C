@@ -54,7 +54,7 @@ void menu()
         //JvsM();
     case 3 :
         system("cls");
-        //regles();
+        regles();
     case 4 :
         exit(EXIT_SUCCESS);
     default :
