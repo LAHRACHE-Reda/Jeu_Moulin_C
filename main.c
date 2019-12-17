@@ -4,12 +4,16 @@
 #include <string.h>
 #include "fonctions.c"
 #include "fonctions.h"
+//int count=0;
+
+
 int main()
 {
-    system("mode 690");   //mode d'affichage
-    menu();
-
-
+    system("mode 690");
+    char x;
+    char T[24]="abcdefghijklmnopqrstuvwx";
+    char T2[24]="abcdefghijklmnopqrstuvwx";
+    menu(T,T2);
     system("pause>null");
-
 }
+
