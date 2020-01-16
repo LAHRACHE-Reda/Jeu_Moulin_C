@@ -52,7 +52,7 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
         p:
         plateau(T,T2);
         p1:
-        MOULIN(T2,T3,T4);
+        MOULIN(T2);
         for(i=0;i<16;i++)
         {
             if(T3[i]==i+1)
@@ -458,7 +458,7 @@ int MOULIN(char T2[24])   // T3 et T4 : des variables globales
 
 }
 
-int posPion(int x,char T2[24])  // permet de donner la position du pion choisis par l'utilisateur dans le tableau
+int posPion(char x,char T2[24])  // permet de donner la position du pion choisis par l'utilisateur dans le tableau
 {
     int i,y;
     for(i=0;i<24;i++)
