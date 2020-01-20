@@ -10,7 +10,6 @@
 int main()
 {
     system("mode 690");
-    char x;
     char T[24]="abcdefghijklmnopqrstuvwx";
     char T2[24]="abcdefghijklmnopqrstuvwx";
     menu(T,T2);
