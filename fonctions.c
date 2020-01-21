@@ -387,12 +387,18 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
 
 
     case 2 :
+system("cls");
+        printf("\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tJoueur 1 entrez votre nom : ");
+        scanf("%s",&J1);
         system("cls");
         ff:
+        if(count<18)
+        {
         plateau(T,T2);
         p2:
         if (count%2==0)
         {
+        printf("\n\t\t\t %s A vous de jouer",J1);
         printf("\n\n------->Donner la position du pion :\n");
         scanf("%s",&x);
         if (condition(count,x,T,T2)==0)
@@ -409,14 +415,17 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
             if ((T2[i]=='$') || (T2[i]=='*'))
                 {
                   goto jj;
-                  x=T[i];
                 }
+            else
+               {
+               x=T[i];
+               }
         }
+        Moulin2(T2);
         changer(count,x,T,T2);
         nbrPions(count);
         MOULIN(T2);
         count+=1;
-        deplacer_pion_machine(T,T2);
         goto ff;
     case 3 :
         system("cls");
