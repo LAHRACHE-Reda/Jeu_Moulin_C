@@ -15,8 +15,11 @@ void MOULIN(char T2[24]);
 int cond_deplacer(char y ,char x ,char T[24] ,char T1[24]);
 void deplacer(char y, char x, char T[24], char T1[24]);
 void Moulin2(char T2[24]);
-int nbrPionPoseJ1(char T2[24]); 
+int nbrPionPoseJ1(char T2[24]);
 int nbrPionPoseJ2(char T2[24]);
+void loading1();
+void loading2();
+cond_capture(char x);
 //void deplacement(char T[24],char T2[24]);
 //void execute();
 
