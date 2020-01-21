@@ -388,8 +388,36 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
 
     case 2 :
         system("cls");
+        ff:
         plateau(T,T2);
-
+        p2:
+        if (count%2==0)
+        {
+        printf("\n\n------->Donner la position du pion :\n");
+        scanf("%s",&x);
+        if (condition(count,x,T,T2)==0)
+        {
+            printf("vous devez choisir l'un des pions disponible");
+            goto p2;
+        }
+        }
+        else
+        {
+            jj:
+            srand(time(NULL));
+            int i=rand()%24;
+            if ((T2[i]=='$') || (T2[i]=='*'))
+                {
+                  goto jj;
+                  x=T[i];
+                }
+        }
+        changer(count,x,T,T2);
+        nbrPions(count);
+        MOULIN(T2);
+        count+=1;
+        deplacer_pion_machine(T,T2);
+        goto ff;
     case 3 :
         system("cls");
         regles();
@@ -1347,7 +1375,204 @@ int cond_capture(char x)     //------------------Permet de ne pas capturer l'un 
             c=0;
     return c;
 }
-
+int cond_deplacer(char y ,char x ,char T[24] ,char T1[24])  //permet de verifier la possibilite de deplacement
+{
+    char T0[2]="jb";
+    char T02[3]="aec";
+    char T33[2]="bo";
+    char T44[2]="ke";
+    char T55[4]="dbhf";
+    char T6[2]="en";
+    char T7[2]="lh";
+    char T8[3]="gei";
+    char T9[2]="hm";
+    char T10[2]="va";
+    char T11[4]="jdsl";
+    char T12[3]="kgp";
+    char T13[3]="irn";
+    char T14[4]="mfuo";
+    char T15[2]="cx";
+    char T16[2]="lq";
+    char T17[3]="ptr";
+    char T18[2]="qm";
+    char T19[2]="kt";
+    char T20[4]="sqwu";
+    char T21[2]="tn";
+    char T22[2]="jw";
+    char T23[3]="vtx";
+    char T24[2]="wo";
+    int c=0,pos,i;
+    pos=posPion(x,T);
+    if(y=='a')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T0[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+    else if(y=='b')
+    {
+        for (i=0;i<3;i++)
+        {
+            if(x==T02[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='c')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T33[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='d')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T44[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='e')
+    {
+        for (i=0;i<4;i++)
+        {
+            if(x==T55[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='f')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T6[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='g')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T7[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='h')
+    {
+        for (i=0;i<3;i++)
+        {
+            if(x==T8[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='i')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T9[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='j')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T10[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='k')
+    {
+        for (i=0;i<4;i++)
+        {
+            if(x==T11[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='l')
+    {
+        for (i=0;i<3;i++)
+        {
+            if(x==T12[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='m')
+    {
+        for (i=0;i<3;i++)
+        {
+            if(x==T13[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='n')
+    {
+        for (i=0;i<4;i++)
+        {
+            if(x==T14[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='o')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T15[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='p')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T16[i] && T1[pos]!='*' && T1[pos]!='$')  c = 0;
+        }
+    }
+      else if(y=='q')
+    {
+        for (i=0;i<3;i++)
+        {
+            if(x==T17[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='r')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T18[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='s')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T19[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='t')
+    {
+        for (i=0;i<4;i++)
+        {
+            if(x==T20[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='u')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T21[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='v')
+    {
+        for (i=0;i<2;i++)
+        {
+            if(x==T22[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if(y=='w')
+    {
+        for (i=0;i<3;i++)
+        {
+            if(x==T23[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+      else if (y=='x')
+    {
+        for (i=0;i<x;i++)
+        {
+            if(x==T24[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
+        }
+    }
+    return c;
+}
 
 
 
