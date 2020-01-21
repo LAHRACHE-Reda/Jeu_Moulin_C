@@ -18,9 +18,10 @@ void Color(int couleurDuTexte,int couleurDeFond) // fonction d'affichage de coul
 
 void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage du jeu
 {
-    int a,i,j;
+    int a,i,j,u;
     char x,y;
     P22:
+    M2:
     Color(12,0);
     char str[]="\t\t\t\t\t\t ___________________________________________________________________\n\t\t\t\t\t\t|      _                    __  __                   _   _          |\n\t\t\t\t\t\t|     | |   ___    _   _   |  \\/  |   ___    _   _  | | (_)  _ __   |\n\t\t\t\t\t\t|  _  | |  / _ \\  | | | |  | |\\/| |  / _ \\  | | | | | | | | | '_ \\  |\n\t\t\t\t\t\t| | |_| | |  __/  | |_| |  | |  | | | (_) | | |_| | | | | | | | | | |\n\t\t\t\t\t\t|  \\___/   \\___|   \\__,_|  |_|  |_|  \\___/   \\__,_| |_| |_| |_| |_| |\n\t\t\t\t\t\t-___________________________________________________________________-";
     printf("%s\n\n\n\n",str);
@@ -57,6 +58,21 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
         printf("\n\t\t\t\t\t\t\t\tJoueur 2 entrez votre nom : ");
         scanf("%s",&J2);
         system("cls");
+        for(u=0;u<15;u++)
+        {
+            Sleep(200);
+            system("cls");
+            if(u%2==0)
+            {
+                loading1();
+            }
+            else
+            {
+                loading2();
+            }
+
+        }
+        system("cls");
         p:
         if(count<18)    //-------------------- Phase positionnement ------------------
         {
@@ -88,16 +104,25 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                         printf("\t\tA vous de capturer: \n\t");
                         w:
                         scanf("%s",&y);
-                        j=posPion(y,T);
-                        if(T2[j]=='*')
+                        if(cond_capture(y)==1)
                         {
-                            T2[j]=T[j];
+                            printf("vous ne pouvez pas capturer ce pion pour l'instant ");
+                            goto w;
                         }
                         else
                         {
-                            printf("Vous devez capturer l'un des pions de votre adversaire ");
-                            goto w;
+                            j=posPion(y,T);
+                            if(T2[j]=='*')
+                            {
+                                T2[j]=T[j];
+                            }
+                            else
+                            {
+                                printf("Vous devez capturer l'un des pions de votre adversaire ");
+                                goto w;
+                            }
                         }
+
                     }
                     else
                     {
@@ -106,16 +131,25 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                         printf("\t\tA vous de capturer: ");
                         w1:
                         scanf("%s",&y);
-                        j=posPion(y,T);
-                        if(T2[j]=='$')
+                        if(cond_capture(y)==1)
                         {
-                            T2[j]=T[j];
+                            printf("vous ne pouvez capturer ce pion pour l'instant ");
+                            goto w1;
                         }
                         else
                         {
-                            printf("Vous devez capturer l'un des pions de votre adversaire ");
-                            goto w1;
+                            j=posPion(y,T);
+                            if(T2[j]=='$')
+                            {
+                                T2[j]=T[j];
+                            }
+                            else
+                            {
+                                printf("Vous devez capturer l'un des pions de votre adversaire ");
+                                goto w1;
+                            }
                         }
+
                     }
                 }
             }
@@ -250,16 +284,25 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                         printf("\t\tA vous de capturer: \n\t");
                         w11:
                         scanf("%s",&y);
-                        j=posPion(y,T);
-                        if(T2[j]=='*')
+                        if(cond_capture(y)==1)
                         {
-                            T2[j]=T[j];
+                            printf("vous ne pouvez pas capturer ce pion pour l'instant ");
+                            goto w11;
                         }
                         else
                         {
-                            printf("Vous devez capturer l'un des pions de votre adversaire ");
-                            goto w11;
+                            j=posPion(y,T);
+                            if(T2[j]=='*')
+                            {
+                                T2[j]=T[j];
+                            }
+                            else
+                            {
+                                printf("Vous devez capturer l'un des pions de votre adversaire ");
+                                goto w11;
+                            }
                         }
+
                     }
                     else
                     {
@@ -268,24 +311,48 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                         printf("\t\tA vous de capturer: ");
                         w22:
                         scanf("%s",&y);
-                        j=posPion(y,T);
-                        if(T2[j]=='$')
+                        if(cond_capture(y)==1)
                         {
-                            T2[j]=T[j];
+                            printf("Vous ne pouvez pas capturer ce pion pour l'instant ");
+                            goto w22;
                         }
                         else
                         {
-                            printf("Vous devez capturer l'un des pions de votre adversaire ");
-                            goto w22;
+                            j=posPion(y,T);
+                            if(T2[j]=='$')
+                            {
+                                T2[j]=T[j];
+                            }
+                            else
+                            {
+                                printf("Vous devez capturer l'un des pions de votre adversaire ");
+                                goto w22;
+                            }
                         }
+
                     }
                 }
             }
         if(nbrPionPoseJ1(T2)<3)
         {
             system("cls");
-            printf("\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Le gagnant est : %s",J2);
-            printf("n\n\n\t\t\t\t\t\t\t\t\t ( Entrez n'importe quel caractere pour sortir de la partie ) ");
+            printf("\n\n\t\t\t\t\t\t\t\t            ___________    ____ \n");
+            printf("\t\t\t\t\t\t\t\t     ______/   \\__//   \\__/____\\ \n");
+            printf("\t\t\t\t\t\t\t\t   _/   \\_/  :           //____\\\\  \n");
+            printf("\t\t\t\t\t\t\t\t  /|      :  :  ..      /        \\ \n");
+            printf("\t\t\t\t\t\t\t\t | |     ::     ::      \\        / \n");
+            printf("\t\t\t\t\t\t\t\t | |     :|     ||     \\ \\______/ \n");
+            printf("\t\t\t\t\t\t\t\t | |     ||     ||      |\\  /  |  \n");
+            printf("\t\t\t\t\t\t\t\t  \\|     ||     ||      |   / | \\ \n");
+            printf("\t\t\t\t\t\t\t\t   |     ||     ||      |  / /_\\ \\ \n");
+            printf("\t\t\t\t\t\t\t\t   | ___ || ___ ||      | /  /    \\ \n");
+            printf("\t\t\t\t\t\t\t\t    \\_-_/  \\_-_/ | ____ |/__/      \\ \n");
+            printf("\t\t\t\t\t\t\t\t                 _\\_--_/    \\      /  \n");
+            printf("\t\t\t\t\t\t\t\t                /____             /  \n");
+            printf("\t\t\t\t\t\t\t\t               /     \\           /  \n");
+            printf("\t\t\t\t\t\t\t\t               \\______\\_________/ \n");
+            printf("\n\n\n\n\n\t\t\t\t\t\t\t\t Le gagnant est : %s",J2);
+            printf("\n\n\t\t\t\t\t\t\t\t\t ( Entrez n'importe quel caractere pour sortir de la partie ) ");
             getch();
             system("cls");
             goto P22;
@@ -293,8 +360,23 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
         if(nbrPionPoseJ2(T2)<3)
         {
             system("cls");
-            printf("\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t Le gagnant est : %s",J1);
-            printf("n\n\n\t\t\t\t\t\t\t\t\t ( Entrez n'importe quel caractere pour sortir de la partie ) ");
+            printf("\n\n\t\t\t\t\t\t\t\t            ___________    ____ \n");
+            printf("\t\t\t\t\t\t\t\t     ______/   \\__//   \\__/____\\ \n");
+            printf("\t\t\t\t\t\t\t\t   _/   \\_/  :           //____\\\\  \n");
+            printf("\t\t\t\t\t\t\t\t  /|      :  :  ..      /        \\ \n");
+            printf("\t\t\t\t\t\t\t\t | |     ::     ::      \\        / \n");
+            printf("\t\t\t\t\t\t\t\t | |     :|     ||     \\ \\______/ \n");
+            printf("\t\t\t\t\t\t\t\t | |     ||     ||      |\\  /  |  \n");
+            printf("\t\t\t\t\t\t\t\t  \\|     ||     ||      |   / | \\ \n");
+            printf("\t\t\t\t\t\t\t\t   |     ||     ||      |  / /_\\ \\ \n");
+            printf("\t\t\t\t\t\t\t\t   | ___ || ___ ||      | /  /    \\ \n");
+            printf("\t\t\t\t\t\t\t\t    \\_-_/  \\_-_/ | ____ |/__/      \\ \n");
+            printf("\t\t\t\t\t\t\t\t                 _\\_--_/    \\      /  \n");
+            printf("\t\t\t\t\t\t\t\t                /____             /  \n");
+            printf("\t\t\t\t\t\t\t\t               /     \\           /  \n");
+            printf("\t\t\t\t\t\t\t\t               \\______\\_________/ \n");
+            printf("\n\n\n\n\n\t\t\t\t\t\t\t\t Le gagnant est : %s",J1);
+            printf("\n\n\t\t\t\t\t\t\t\t\t ( Entrez n'importe quel caractere pour sortir de la partie ) ");
             getch();
             system("cls");
             goto P22;
@@ -311,6 +393,11 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
     case 3 :
         system("cls");
         regles();
+        printf("\n\n\n\t\t\t\t\t\tEntrez n'importe quel caractere pour sortir au menu");
+        getch();
+        system("cls");
+        goto M2;
+
     case 4 :
         exit(EXIT_SUCCESS);
     default :
@@ -951,10 +1038,315 @@ int nbrPionPoseJ2(char T2[24])      // Permet de calculer le nombre de pion du j
 }
 
 
+void loading1()
+{
+                printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t   .");
+                Color(4,4);
+                printf("    ");
+                Color(8,0);
+                printf(" ");
+                Color(11,11);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+
+                printf("\n\t\t\t\t\t\t\t\t\t\t   .");
+                Color(4,4);
+                printf("    ");
+                Color(8,0);
+                printf(" ");
+                Color(11,11);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+                /*
+                color(8,0);
+                printf("\n\t\t\t\t\t\t\t\t\t\t");
+                color(11,11);
+                printf("    aaaa            ");
+                color(11,11);
+                printf("aaaa");
+                color(8,0);
+                printf(". ");
+                */
+
+                printf("\n\n        \t\t\t\t\t\t\t\t      .");
+                Color(4,4);
+                printf("aaaa");
+
+                Color(8,0);
+                printf(" ");
+
+                Color(8,0);
+                printf("     ");
+
+                Color(4,4);
+                printf("    ");
+
+                Color(8,0);
+                printf(" ");
+
+                Color(7,7);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+
+                printf("\n\t\t\t\t\t\t\t\t\t      .");
+                Color(4,4);
+                printf("aaaa");
+
+                Color(8,0);
+                printf(" ");
+
+                Color(8,0);
+                printf("     ");
+
+                Color(4,4);
+                printf("    ");
+
+                Color(8,0);
+                printf(" ");
+
+                Color(7,7);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+
+                //////////////////
+
+                printf("\n\n\t\t\t\t\t\t\t\t\t\t   .");
+                Color(4,4);
+                printf("    ");
+                Color(8,0);
+                printf(" ");
+                Color(7,7);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+
+                printf("\n\t\t\t\t\t\t\t\t\t\t   .");
+                Color(4,4);
+                printf("    ");
+                Color(8,0);
+                printf(" ");
+                Color(7,7);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+                printf("\n\n\n");
+}
+
+void loading2()
+{
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t   .");
+                Color(4,4);
+                printf("    ");
+                Color(8,0);
+                printf(" ");
+                Color(7,7);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+
+                printf("\n\t\t\t\t\t\t\t\t\t\t   .");
+                Color(4,4);
+                printf("    ");
+                Color(8,0);
+                printf(" ");
+                Color(7,7);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+                /*
+                color(8,0);
+                printf("\n\t\t\t\t\t\t\t\t\t\t");
+                color(11,11);
+                printf("    aaaa            ");
+                color(11,11);
+                printf("aaaa");
+                color(8,0);
+                printf(". ");
+                */
+
+                printf("\n\n        \t\t\t\t\t\t\t\t      .");
+                Color(4,4);
+                printf("aaaa");
+
+                Color(8,0);
+                printf(" ");
+
+                Color(7,7);
+                printf("    ");
+
+                Color(8,0);
+                printf("      ");
+                Color(7,7);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+
+                printf("\n\t\t\t\t\t\t\t\t\t      .");
+                Color(4,4);
+                printf("aaaa");
+
+                Color(8,0);
+                printf(" ");
+
+                Color(7,7);
+                printf("    ");
+
+                Color(8,0);
+                printf("      ");
+                Color(7,7);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+
+                //////////////////
+
+                printf("\n\n\t\t\t\t\t\t\t\t\t\t   .");
+                Color(4,4);
+                printf("    ");
+                Color(8,0);
+                printf(" ");
+                Color(7,7);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+
+                printf("\n\t\t\t\t\t\t\t\t\t\t   .");
+                Color(4,4);
+                printf("    ");
+                Color(8,0);
+                printf(" ");
+                Color(7,7);
+                printf("aaaa");
+                Color(8,0);
+                printf(". ");
+                printf("\n\n\n");
+}
 
 
 
 
+
+int cond_capture(char x)     //------------------Permet de ne pas capturer l'un des pions allignés-------------------
+{
+    int c=0;
+    if(T4[0]=1)
+        if( x=='a' || x=='b' || x=='c' )
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[1]=2)
+        if(x=='d'||x=='e'||x=='f')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[2]=3)
+        if(x=='g'||x=='h'||x=='i')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[3]=4)
+        if(x=='j'||x=='k'||x=='l')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[4]=5)
+        if(x=='m'||x=='n'||x=='o')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[5]=6)
+        if(x=='p'||x=='q'||x=='r')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[6]=7)
+        if(x=='s'||x=='t'||x=='u')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[7]=8)
+        if(x=='v'||x=='w'||x=='x')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[8]=9)
+        if(x=='a'||x=='j'||x=='v')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[9]=10)
+        if(x=='d'||x=='k'||x=='s')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[10]=11)
+        if(x=='g'||x=='l'||x=='p')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[11]=12)
+        if(x=='b'||x=='e'||x=='h')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[12]=13)
+        if(x=='q'||x=='t'||x=='w')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[13]=14)
+        if(x=='i'||x=='m'||x=='r')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[14]=15)
+        if(x=='f'||x=='n'||x=='u')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    if(T4[15]=16)
+        if(x=='c'||x=='o'||x=='x')
+        {
+            {c=1;}
+        }
+        else
+            c=0;
+    return c;
+}
 
 
 
