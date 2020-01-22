@@ -362,10 +362,16 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
             printf("\t\t\t\t\t\t\t\t               \\______\\_________/ \n");
             printf("\n\n\n\n\n\t\t\t\t\t\t\t\t Le gagnant est : %s",J2);
             Color(15,0);
-            Count=0;
+            count=0;
             n=0;m=0;
-            T3[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};  
-            T4[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; 
+            for(i=0;i<16;i++)
+            {
+                T3[i]=0;T4[i]=0;
+            }
+            for(i=0;i<24;i++)
+            {
+                T2[i]=T[i];
+            }
 
             printf("\n\n\t\t\t\t\t\t\t\t\t ( Entrez n'importe quel caractere pour sortir de la partie ) ");
             getch();
@@ -393,10 +399,16 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
             printf("\t\t\t\t\t\t\t\t               \\______\\_________/ \n");
             printf("\n\n\n\n\n\t\t\t\t\t\t\t\t Le gagnant est : %s",J1);
             Color(15,0);
-            Count=0;
+            count=0;
             n=0;m=0;
-            T3[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};  
-            T4[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; 
+            for(i=0;i<16;i++)
+            {
+                T3[i]=0;T4[i]=0;
+            }
+            for(i=0;i<24;i++)
+            {
+                T2[i]=T[i];
+            }
             printf("\n\n\t\t\t\t\t\t\t\t\t ( Entrez n'importe quel caractere pour sortir de la partie ) ");
             getch();
             system("cls");
