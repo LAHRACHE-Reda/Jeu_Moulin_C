@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <string.h>
 #include "fonctions.h"
-char J1[25],J2[25];  // nom des joueurs
+char J1[25],J2[25]="MACHINE";  // nom des joueurs
 int count=0;
 //int z=0;
 int n=0,m=0;
@@ -16,7 +16,7 @@ void Color(int couleurDuTexte,int couleurDeFond) // fonction d'affichage de coul
         SetConsoleTextAttribute(H,couleurDeFond*16+couleurDuTexte);
 }
 
-void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage du jeu
+void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du menu de démarage du jeu-------------------
 {
     int a,i,j,u;
     char x,y;
@@ -51,11 +51,11 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
     scanf("%d",&a);
     switch(a)
     {
-    case 1 :               //------------------- Joueur contre Joueur ------------------------
+    case 1 :                                 //------------------- Joueur contre Joueur ------------------------
         system("cls");
-        printf("\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tJoueur 1 entrez votre nom : ");
+        printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tJoueur 1 entrez votre nom : ");
         scanf("%s",&J1);
-        printf("\n\t\t\t\t\t\t\t\tJoueur 2 entrez votre nom : ");
+        printf("\n\n\n\n\t\t\t\t\t\t\t\tJoueur 2 entrez votre nom : ");
         scanf("%s",&J2);
         system("cls");
         for(u=0;u<15;u++)
@@ -74,14 +74,14 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
         }
         system("cls");
         p:
-        if(count<18)    //-------------------- Phase positionnement ------------------
+        if(count<18)                          //-------------------- Phase positionnement ------------------
         {
             plateau(T,T2);
             p1:
             if(Player(count)==1)
-                printf("\n\t\t\t %s A vous de jouer",J1);
+                {Color(8,0);printf("\n\t\t\t %s A vous de jouer",J1);Color(15,0);}
             else
-                printf("\n\t\t\t %s A vous de jouer",J2);
+                {Color(4,0);printf("\n\t\t\t %s A vous de jouer",J2);Color(15,0);}
             printf("\n\n\t----->  Donner la position du pion :  ");
             scanf("%s",&x);
             if (condition(count,x,T,T2)==0)
@@ -99,7 +99,9 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                 {
                     if(Player(count)==1)
                     {
-                        printf("\t\t\t\t\t\t\t\t\tMoulin pour %s\n\n",J1);
+                        system("cls");
+                        plateau(T,T2);
+                        Color(8,0);printf("\t\t\t\t\t\t\t\t\tMoulin pour %s\n\n",J1);Color(15,0);
                         T3[i]=100;
                         printf("\t\tA vous de capturer: \n\t");
                         w:
@@ -126,7 +128,9 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                     }
                     else
                     {
-                        printf("\t\t\t\t\t\t\t\t\tMoulin pour %s\n\n",J2);
+                        system("cls");
+                        plateau(T,T2);
+                        Color(4,0);printf("\t\t\t\t\t\t\t\t\tMoulin pour %s\n\n",J2);Color(15,0);
                         T3[i]=100;
                         printf("\t\tA vous de capturer: ");
                         w1:
@@ -136,7 +140,7 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                             printf("vous ne pouvez capturer ce pion pour l'instant ");
                             goto w1;
                         }
-                        else
+                        if(cond_capture(y)==0)
                         {
                             j=posPion(y,T);
                             if(T2[j]=='$')
@@ -161,23 +165,23 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
             system("cls");
             plateau(T,T2);
             if(Player(count)==1)
-                printf("\n\t\t\t %s choisi le pion a deplacer",J1);
+                {Color(8,0);printf("\n\t\t\t %s choisi le pion a deplacer",J1);Color(15,0);}
             else
-                printf("\n\t\t\t %s choisi le pion a deplacer",J2);
+                {Color(4,0);printf("\n\t\t\t %s choisi le pion a deplacer",J2);Color(15,0);}
             M:
             scanf("%s",&y);
             if(Player(count)==1)
             {
                 if(T2[posPion(y,T)]!='$')
                 {
-                    printf("vous devez deplacer votre Pion ");
+                    Color(8,0);printf("vous devez deplacer votre Pion ");Color(15,0);
                     goto M;
                 }
                 else
                 {
-                    if(nbrPionPoseJ1(T2)>3)       //---------- Déplacement normale J2------------
+                    if(nbrPionPoseJ1(T2)>3)                        //---------- Déplacement normale J2------------
                     {
-                        printf("\n\nchoisir la destination du pion ( ENTREZ 'z' si VOUS VOULEZ ANNULER VOTRE CHOIX ) : ");
+                        Color(8,0);printf("\n\nChoisir la destination du pion ( ENTREZ 'z' si VOUS VOULEZ ANNULER VOTRE CHOIX ) : ");Color(15,0);
                         L:
                         scanf("%s",&x);
                         if(x=='z')
@@ -197,9 +201,9 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                             }
                         }
                     }
-                    if(nbrPionPoseJ1(T2)==3)      //------------- Déplacement dans n'importe quel destination J1-------
+                    if(nbrPionPoseJ1(T2)==3)                //------------- Déplacement dans n'importe quel destination J1-------
                     {
-                        printf("\n\nchoisir la destination du pion ( ENTREZ 'z' si VOUS VOULEZ ANNULER VOTRE CHOIX ) : ");
+                        Color(8,0);printf("\n\nchoisir la destination du pion ( ENTREZ 'z' si VOUS VOULEZ ANNULER VOTRE CHOIX ) : ");Color(15,0);
                         L6:
                         scanf("%s",&x);
                         if(x=='z')
@@ -222,14 +226,14 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
             {
                 if(T2[posPion(y,T)]!='*')
                 {
-                    printf("vous devez deplacer votre Pion ");
+                    Color(4,0);printf("vous devez deplacer votre Pion ");Color(15,0);
                     goto M;
                 }
                 else
                 {
-                    if(nbrPionPoseJ2(T2)>3)       //---------- Déplacement normale J2------------
+                    if(nbrPionPoseJ2(T2)>3)                             //---------- Déplacement normale J2------------
                     {
-                        printf("\n\nchoisir la destination du pion ( ENTREZ 'z' si VOUS VOULEZ ANNULER VOTRE CHOIX ) : ");
+                        Color(4,0);printf("\n\nchoisir la destination du pion ( ENTREZ 'z' si VOUS VOULEZ ANNULER VOTRE CHOIX ) : ");Color(15,0);
                         L11:
                         scanf("%s",&x);
                         if(x=='z')
@@ -249,9 +253,9 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                             }
                         }
                     }
-                    if(nbrPionPoseJ2(T2)==3)      //------------- Déplacement dans n'importe quel destination J2-------
+                    if(nbrPionPoseJ2(T2)==3)                    //------------- Déplacement dans n'importe quel destination J2-------
                     {
-                        printf("\n\nchoisir la destination du pion ( ENTREZ 'z' si VOUS VOULEZ ANNULER VOTRE CHOIX ) : ");
+                        Color(4,0);printf("\n\nchoisir la destination du pion ( ENTREZ 'z' si VOUS VOULEZ ANNULER VOTRE CHOIX ) : ");Color(15,0);
                         L66:
                         scanf("%s",&x);
                         if(x=='z')
@@ -279,7 +283,9 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                 {
                     if(Player(count)==1)
                     {
-                        printf("\t\t\t\t\t\t\t\t\tMoulin pour %s\n\n",J1);
+                        system("cls");
+                        plateau(T,T2);
+                        Color(8,0);printf("\t\t\t\t\t\t\t\t\tMoulin pour %s\n\n",J1);Color(15,0);
                         T3[i]=100;
                         printf("\t\tA vous de capturer: \n\t");
                         w11:
@@ -289,7 +295,7 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                             printf("vous ne pouvez pas capturer ce pion pour l'instant ");
                             goto w11;
                         }
-                        else
+                        if(cond_capture(y)==0)
                         {
                             j=posPion(y,T);
                             if(T2[j]=='*')
@@ -306,7 +312,9 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                     }
                     else
                     {
-                        printf("\t\t\t\t\t\t\t\t\tMoulin pour %s\n\n",J2);
+                        system("cls");
+                        plateau(T,T2);
+                        Color(4,0);printf("\t\t\t\t\t\t\t\t\tMoulin pour %s\n\n",J2);Color(15,0);
                         T3[i]=100;
                         printf("\t\tA vous de capturer: ");
                         w22:
@@ -316,7 +324,7 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                             printf("Vous ne pouvez pas capturer ce pion pour l'instant ");
                             goto w22;
                         }
-                        else
+                        if(cond_capture(y)==0)
                         {
                             j=posPion(y,T);
                             if(T2[j]=='$')
@@ -333,9 +341,10 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
                     }
                 }
             }
-        if(nbrPionPoseJ1(T2)<3)
+        if(nbrPionPoseJ1(T2)<3)                  // ---------------------- le gagnant est le 2ème JOUEUR -----------------------
         {
             system("cls");
+            Color(4,0);
             printf("\n\n\t\t\t\t\t\t\t\t            ___________    ____ \n");
             printf("\t\t\t\t\t\t\t\t     ______/   \\__//   \\__/____\\ \n");
             printf("\t\t\t\t\t\t\t\t   _/   \\_/  :           //____\\\\  \n");
@@ -352,14 +361,21 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
             printf("\t\t\t\t\t\t\t\t               /     \\           /  \n");
             printf("\t\t\t\t\t\t\t\t               \\______\\_________/ \n");
             printf("\n\n\n\n\n\t\t\t\t\t\t\t\t Le gagnant est : %s",J2);
+            Color(15,0);
+            Count=0;
+            n=0;m=0;
+            T3[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};  
+            T4[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; 
+
             printf("\n\n\t\t\t\t\t\t\t\t\t ( Entrez n'importe quel caractere pour sortir de la partie ) ");
             getch();
             system("cls");
             goto P22;
         }
-        if(nbrPionPoseJ2(T2)<3)
+        if(nbrPionPoseJ2(T2)<3)                 // ---------------------- le gagnant est le 1er JOUEUR -----------------------
         {
             system("cls");
+            Color(8,0);
             printf("\n\n\t\t\t\t\t\t\t\t            ___________    ____ \n");
             printf("\t\t\t\t\t\t\t\t     ______/   \\__//   \\__/____\\ \n");
             printf("\t\t\t\t\t\t\t\t   _/   \\_/  :           //____\\\\  \n");
@@ -376,6 +392,11 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
             printf("\t\t\t\t\t\t\t\t               /     \\           /  \n");
             printf("\t\t\t\t\t\t\t\t               \\______\\_________/ \n");
             printf("\n\n\n\n\n\t\t\t\t\t\t\t\t Le gagnant est : %s",J1);
+            Color(15,0);
+            Count=0;
+            n=0;m=0;
+            T3[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};  
+            T4[16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; 
             printf("\n\n\t\t\t\t\t\t\t\t\t ( Entrez n'importe quel caractere pour sortir de la partie ) ");
             getch();
             system("cls");
@@ -386,47 +407,109 @@ void menu(char T[24],char T2[24]) // fonction d'affichage du menu de démarage d
         goto p;
 
 
-    case 2 :
-system("cls");
+    case 2 :                         //---------------------------------Joueur contre Machine---------------------------------------
+        system("cls");
         printf("\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tJoueur 1 entrez votre nom : ");
         scanf("%s",&J1);
         system("cls");
         ff:
         if(count<18)
         {
-        plateau(T,T2);
-        p2:
-        if (count%2==0)
-        {
-        printf("\n\t\t\t %s A vous de jouer",J1);
-        printf("\n\n------->Donner la position du pion :\n");
-        scanf("%s",&x);
-        if (condition(count,x,T,T2)==0)
-        {
-            printf("vous devez choisir l'un des pions disponible");
-            goto p2;
-        }
-        }
-        else
-        {
-            jj:
-            srand(time(NULL));
-            int i=rand()%24;
-            if ((T2[i]=='$') || (T2[i]=='*'))
+            plateau(T,T2);
+            p2:
+            if (count%2==0)
+            {
+                printf("\n\t\t\t %s A vous de jouer",J1);
+                printf("\n\n------->Donner la position du pion :  ");
+                scanf("%s",&x);
+                if (condition(count,x,T,T2)==0)
                 {
-                  goto jj;
+                    printf("vous devez choisir l'un des pions disponible  ");
+                    goto p2;
                 }
+            }
             else
-               {
-               x=T[i];
-               }
-        }
+            {
+                jj:
+                srand(time(NULL));
+                int ii=rand()%24;
+                if ((T2[ii]=='$') || (T2[ii]=='*'))
+                {
+                    goto jj;
+                }
+                else
+                {
+                    x=T[ii];
+                }
+            }
         Moulin2(T2);
         changer(count,x,T,T2);
         nbrPions(count);
         MOULIN(T2);
+        for(i=0;i<16;i++)
+            {
+                if(T3[i]==i+1)
+                {
+                    if(Player(count)==1)
+                    {
+                        system("cls");
+                        plateau(T,T2);
+                        Color(8,0);printf("\t\t\t\t\t\t\t\t\tMoulin pour %s\n\n",J1);Color(15,0);
+                        T3[i]=100;
+                        printf("\t\tA vous de capturer: \n\t");
+                        w0:
+                        scanf("%s",&y);
+                        if(cond_capture(y)==1)
+                        {
+                            printf("vous ne pouvez pas capturer ce pion pour l'instant ");
+                            goto w0;
+                        }
+                        else
+                        {
+                            j=posPion(y,T);
+                            if(T2[j]=='*')
+                            {
+                                T2[j]=T[j];
+                            }
+                            else
+                            {
+                                printf("Vous devez capturer l'un des pions de votre adversaire ");
+                                goto w0;
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        system("cls");
+                        plateau(T,T2);
+                        Color(4,0);printf("\t\t\t\t\t\t\t\t\tMoulin pour %s\n\n",J2);Color(15,0);
+                        T3[i]=100;
+                        HH:
+                        srand(time(NULL));
+                        int jj=rand()%24;
+                        if(cond_capture(T[jj])==1)
+                        {
+                            goto HH;
+                        }
+                        else
+                        {
+                            if(T2[jj]=='$')
+                            {
+                                T2[jj]=T[jj];
+                            }
+                            else
+                            {
+                                goto HH;
+                            }
+                        }
+
+                    }
+                }
+            }
         count+=1;
         goto ff;
+        }
     case 3 :
         system("cls");
         regles();
@@ -443,7 +526,7 @@ system("cls");
     }
 }
 
-void plateau(char T[24],char T2[24])      //Permet l'affichage de la grille
+void plateau(char T[24],char T2[24])      //----------------------Permet l'affichage de la grille---------------------------
 {
 system("cls");
 Color(12,0);
@@ -514,7 +597,7 @@ printf("\nFaire des alignements de trois pions pour pouvoir capturer les pions d
 
 }
 
-int Player(int count1)   // permet de distinguer entre les joueurs
+int Player(int count1)   //--------------------------------- permet de distinguer entre les joueurs--------------------------------
 {
     int a;
     if(count1%2==0)
@@ -524,7 +607,7 @@ int Player(int count1)   // permet de distinguer entre les joueurs
     return a;
 }
 
-void coloriage(int x,char T[24],char T2[24])    // Permet l'affichage au debut et le colorige de chaque pions choisis par chaque joueur
+void coloriage(int x,char T[24],char T2[24])    // ------------------Permet l'affichage des pions et le colorige de chaque pions choisis par chaque joueur------------------
 {
             if (T2[x]=='$')
                 {
@@ -542,7 +625,7 @@ void coloriage(int x,char T[24],char T2[24])    // Permet l'affichage au debut e
 }
 
 
-void changer(int count1,char x,char T[24],char T2[24])   // permet de stocker les pions choisis par chaque joueur dans un autre tableau T2
+void changer(int count1,char x,char T[24],char T2[24])   // ----------------permet de stocker les pions choisis par chaque joueur dans un autre tableau T2-------------------
 {
     for (int i=0;i<24;i++)
     {
@@ -562,7 +645,7 @@ void changer(int count1,char x,char T[24],char T2[24])   // permet de stocker le
     }
 }
 
-void nbrPions(int count1)   // permet de calculer le nombre de pions posé par un joueur
+void nbrPions(int count1)   // ---------------------permet de calculer le nombre de pions posé par un joueur-----------------------
 {
     int a=0;
     a=Player(count1);
@@ -574,7 +657,7 @@ void nbrPions(int count1)   // permet de calculer le nombre de pions posé par u
 
 }
 
-int condition(int count1, char s, char T[24],char T2[24])     // Permet de ne pas repeter le mm choix d'un mm pions (case pleine)
+int condition(int count1, char s, char T[24],char T2[24])     //-------------- Permet de ne pas repeter le mm choix d'un mm pions (case pleine)-------------------
 {
     int c=0;
     int i;
@@ -594,7 +677,7 @@ int condition(int count1, char s, char T[24],char T2[24])     // Permet de ne pa
     return c;
 }
 
-void MOULIN(char T2[24])   // T3 et T4 : des variables globales
+void MOULIN(char T2[24])   // ---------------------Permet de detecter les différents cas de moulin   (T3 et T4 : des variables globales)------------------------
 {
     if((T2[0]=='$' && T2[1]=='$' && T2[2]=='$') || (T2[0]=='*' && T2[1]=='*' && T2[2]=='*'))
     {
@@ -731,7 +814,7 @@ void MOULIN(char T2[24])   // T3 et T4 : des variables globales
 
 }
 
-int posPion(char x,char T2[24])  // permet de donner la position du pion choisis par l'utilisateur dans le tableau
+int posPion(char x,char T2[24])  // -------------------permet de donner la position du pion choisis par l'utilisateur dans le tableau--------------
 {
     int i;
     for(i=0;i<24;i++)
@@ -742,7 +825,7 @@ int posPion(char x,char T2[24])  // permet de donner la position du pion choisis
     return i;
 }
 
-int cond_deplacer(char y ,char x ,char T[24] ,char T1[24])  //permet de verifier la possibilite de deplacement
+int cond_deplacer(char y ,char x ,char T[24] ,char T1[24])  //------------------permet de verifier la possibilite de deplacement-------------------
 {
     char T0[2]="jb";
     char T02[3]="aec";
@@ -951,7 +1034,7 @@ void deplacer(char y, char x, char T[24], char T1[24])    // permet le déplacem
     else T1[j]='*';
 }
 
-void Moulin2(char T2[24])    // pour detecter un moulin une autre fois dans un mm emplacement après modification du moulin
+void Moulin2(char T2[24])    // ------------------------pour detecter un moulin une autre fois dans un mm emplacement après modification du moulin-----------------------------
 {
     if(T2[0]=='a')
     {
@@ -1052,7 +1135,7 @@ void Moulin2(char T2[24])    // pour detecter un moulin une autre fois dans un m
 }
 
 
-int nbrPionPoseJ1(char T2[24])    // Permet de calculer le nombre de pion du joueur 1 resté dans le plateau
+int nbrPionPoseJ1(char T2[24])    //------------------------- Permet de calculer le nombre de pion du joueur 1 resté dans le plateau -------------
 {
     int i,j1=0;
     for(i=0;i<24;i++)
@@ -1063,7 +1146,7 @@ int nbrPionPoseJ1(char T2[24])    // Permet de calculer le nombre de pion du jou
     return j1;
 }
 
-int nbrPionPoseJ2(char T2[24])      // Permet de calculer le nombre de pion du joueur 2 resté dans le plateau
+int nbrPionPoseJ2(char T2[24])      //---------------------- Permet de calculer le nombre de pion du joueur 2 resté dans le plateau -----------------
 {
     int i,j2=0;
     for(i=0;i<24;i++)
@@ -1075,7 +1158,7 @@ int nbrPionPoseJ2(char T2[24])      // Permet de calculer le nombre de pion du j
 }
 
 
-void loading1()
+void loading1()      //---------------------- loading partie 1 ----------------------
 {
                 printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t   .");
                 Color(4,4);
@@ -1173,7 +1256,7 @@ void loading1()
                 printf("\n\n\n");
 }
 
-void loading2()
+void loading2()                         //---------------------- loading partie 1 ----------------------
 {
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\t\t\t   .");
                 Color(4,4);
@@ -1267,321 +1350,109 @@ void loading2()
 
 
 
-int cond_capture(char x)     //------------------Permet de ne pas capturer l'un des pions allignés-------------------
+int cond_capture(char x)
 {
     int c=0;
-    if(T4[0]=1)
-        if( x=='a' || x=='b' || x=='c' )
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[1]=2)
-        if(x=='d'||x=='e'||x=='f')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[2]=3)
-        if(x=='g'||x=='h'||x=='i')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[3]=4)
-        if(x=='j'||x=='k'||x=='l')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[4]=5)
-        if(x=='m'||x=='n'||x=='o')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[5]=6)
-        if(x=='p'||x=='q'||x=='r')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[6]=7)
-        if(x=='s'||x=='t'||x=='u')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[7]=8)
-        if(x=='v'||x=='w'||x=='x')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[8]=9)
-        if(x=='a'||x=='j'||x=='v')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[9]=10)
-        if(x=='d'||x=='k'||x=='s')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[10]=11)
-        if(x=='g'||x=='l'||x=='p')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[11]=12)
-        if(x=='b'||x=='e'||x=='h')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[12]=13)
-        if(x=='q'||x=='t'||x=='w')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[13]=14)
-        if(x=='i'||x=='m'||x=='r')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[14]=15)
-        if(x=='f'||x=='n'||x=='u')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    if(T4[15]=16)
-        if(x=='c'||x=='o'||x=='x')
-        {
-            {c=1;}
-        }
-        else
-            c=0;
-    return c;
-}
-int cond_deplacer(char y ,char x ,char T[24] ,char T1[24])  //permet de verifier la possibilite de deplacement
-{
-    char T0[2]="jb";
-    char T02[3]="aec";
-    char T33[2]="bo";
-    char T44[2]="ke";
-    char T55[4]="dbhf";
-    char T6[2]="en";
-    char T7[2]="lh";
-    char T8[3]="gei";
-    char T9[2]="hm";
-    char T10[2]="va";
-    char T11[4]="jdsl";
-    char T12[3]="kgp";
-    char T13[3]="irn";
-    char T14[4]="mfuo";
-    char T15[2]="cx";
-    char T16[2]="lq";
-    char T17[3]="ptr";
-    char T18[2]="qm";
-    char T19[2]="kt";
-    char T20[4]="sqwu";
-    char T21[2]="tn";
-    char T22[2]="jw";
-    char T23[3]="vtx";
-    char T24[2]="wo";
-    int c=0,pos,i;
-    pos=posPion(x,T);
-    if(y=='a')
+    if (x=='a')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T0[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[0]==1 || T4[8]==9) c=1;
     }
-    else if(y=='b')
+    if (x=='b')
     {
-        for (i=0;i<3;i++)
-        {
-            if(x==T02[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[0]==1 || T4[11]==12) c=1;
     }
-      else if(y=='c')
+    if (x=='c')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T33[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[0]==1 || T4[15]==16) c=1;
     }
-      else if(y=='d')
+    if (x=='d')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T44[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[9]==10 || T4[1]==2) c=1;
     }
-      else if(y=='e')
+    if (x=='e')
     {
-        for (i=0;i<4;i++)
-        {
-            if(x==T55[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[11]==12 || T4[1]==2) c=1;
     }
-      else if(y=='f')
+    if (x=='f')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T6[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[1]==2 || T4[14]==15) c=1;
     }
-      else if(y=='g')
+    if (x=='g')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T7[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[2]==3 || T4[10]==11) c=1;
     }
-      else if(y=='h')
+    if (x=='h')
     {
-        for (i=0;i<3;i++)
-        {
-            if(x==T8[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[2]==3 || T4[11]==12) c=1;
     }
-      else if(y=='i')
+    if (x=='i')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T9[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[2]==3 || T4[13]==14) c=1;
     }
-      else if(y=='j')
+    if (x=='j')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T10[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[3]==4 || T4[8]==9) c=1;
     }
-      else if(y=='k')
+    if (x=='k')
     {
-        for (i=0;i<4;i++)
-        {
-            if(x==T11[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[3]==4 || T4[9]==10) c=1;
     }
-      else if(y=='l')
+    if (x=='l')
     {
-        for (i=0;i<3;i++)
-        {
-            if(x==T12[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[3]==4 || T4[10]==11) c=1;
     }
-      else if(y=='m')
+    if (x=='m')
     {
-        for (i=0;i<3;i++)
-        {
-            if(x==T13[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[4]==5 || T4[13]==14) c=1;
     }
-      else if(y=='n')
+    if (x=='n')
     {
-        for (i=0;i<4;i++)
-        {
-            if(x==T14[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[4]==5 || T4[14]==15) c=1;
     }
-      else if(y=='o')
+    if (x=='o')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T15[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[4]==5 || T4[15]==16) c=1;
     }
-      else if(y=='p')
+    if (x=='p')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T16[i] && T1[pos]!='*' && T1[pos]!='$')  c = 0;
-        }
+        if(T4[5]==6 || T4[10]==11) c=1;
     }
-      else if(y=='q')
+    if (x=='q')
     {
-        for (i=0;i<3;i++)
-        {
-            if(x==T17[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[5]==6 || T4[12]==13) c=1;
     }
-      else if(y=='r')
+    if (x=='r')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T18[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[5]==6 || T4[13]==14) c=1;
     }
-      else if(y=='s')
+    if (x=='s')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T19[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[6]==7 || T4[9]==10) c=1;
     }
-      else if(y=='t')
+    if (x=='t')
     {
-        for (i=0;i<4;i++)
-        {
-            if(x==T20[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[6]==7 || T4[12]==13) c=1;
     }
-      else if(y=='u')
+    if (x=='u')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T21[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[6]==7 || T4[14]==15) c=1;
     }
-      else if(y=='v')
+    if (x=='v')
     {
-        for (i=0;i<2;i++)
-        {
-            if(x==T22[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[7]==8 || T4[8]==9) c=1;
     }
-      else if(y=='w')
+    if (x=='w')
     {
-        for (i=0;i<3;i++)
-        {
-            if(x==T23[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[7]==8 || T4[12]==13) c=1;
     }
-      else if (y=='x')
+    if (x=='x')
     {
-        for (i=0;i<x;i++)
-        {
-            if(x==T24[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
-        }
+        if(T4[7]==8 || T4[15]==16) c=1;
     }
     return c;
 }
+
+
 
 
 
