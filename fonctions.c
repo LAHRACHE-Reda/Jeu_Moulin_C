@@ -736,6 +736,7 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
             goto P22;
         }
         count++;
+    }
         goto ff;
     case 3 :
         system("cls");
