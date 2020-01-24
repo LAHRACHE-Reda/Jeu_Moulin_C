@@ -516,16 +516,14 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
                             }
                             else
                             {
-                                if(cond_capture(T[Tj[jj]])==1)
+                                int r=Tj[jj];
+                                if(cond_capture(T[r])==1)
                                     {goto HH;}
                                 else
                                 {
-                                    if(T2[jj]=='$')
-                                    {
-                                        T2[jj]=T[jj];
-                                        PionPose(T2);
-                                        Sleep(1000);
-                                    }
+                                    T2[r]=T[r];
+                                    PionPose(T2);
+                                    Sleep(1000);
                                 }
                             }
 
@@ -704,16 +702,14 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
                             }
                             else
                             {
-                                if(cond_capture(T[Tj[jj]])==1)
+                                int r=Tj[jj];
+                                if(cond_capture(T[r])==1)
                                     {goto HH1;}
                                 else
                                 {
-                                    if(T2[jj]=='$')
-                                    {
-                                        T2[jj]=T[jj];
-                                        PionPose(T2);
-                                        Sleep(1000);
-                                    }
+                                    T2[r]=T[r];
+                                    PionPose(T2);
+                                    Sleep(1000);
                                 }
                             }
 
