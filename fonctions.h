@@ -20,6 +20,10 @@ int nbrPionPoseJ2(char T2[24]);
 void loading1();
 void loading2();
 int cond_capture(char x);
+int Deplacement_Machine(char y,char T[24],char T1[24]);
+void PionPose(char T2[24]);
+void PionPoseMACHINE3(char T2[24]);
+int Connd_Deplacement_Machine(char y,char T[24],char T1[24]);
 //void deplacement(char T[24],char T2[24]);
 //void execute();
 
