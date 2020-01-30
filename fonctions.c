@@ -55,7 +55,11 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
     scanf("%d",&a);
     switch(a)
     {
-    case 1 :                                 //------------------- Joueur contre Joueur ------------------------
+    case 1 :          //------------------- Joueur contre Joueur ------------------------
+        int r;
+        srand(time(NULL));
+        r=rand%2;
+        count=r;                              
         system("cls");
         printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tJoueur 1 entrez votre nom : ");
         scanf("%s",&J1);
@@ -78,7 +82,7 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
         }
         system("cls");
         p:
-        if(count<18)                          //-------------------- Phase positionnement ------------------
+        if(count<18+r)                          //-------------------- Phase positionnement ------------------
         {
             plateau(T,T2);
             p1:
@@ -162,16 +166,27 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
                 }
             }
             count+=1;
+
         }
-        if(count>17 && nbrPionPoseJ1(T2)>2 && nbrPionPoseJ2(T2)>2)              //------------------- Phase déplacement  -------------------
+        if(count>17+r && nbrPionPoseJ1(T2)>2 && nbrPionPoseJ2(T2)>2)              //------------------- Phase déplacement  -------------------
         {
             L4:
+            if (Blockage_J1(T,T2)==0)
+                {goto q;}
+            if (Blockage_J2(T,T2)==0)
+                {goto r;}
             system("cls");
             plateau(T,T2);
             if(Player(count)==1)
-                {Color(8,0);printf("\n\t\t\t %s choisi le pion a deplacer",J1);Color(15,0);}
+            {   
+                Color(8,0);printf("\n\t\t\t %s choisi le pion a deplacer",J1);Color(15,0);
+                
+            }
             else
-                {Color(4,0);printf("\n\t\t\t %s choisi le pion a deplacer",J2);Color(15,0);}
+            {
+                Color(4,0);printf("\n\t\t\t %s choisi le pion a deplacer",J2);Color(15,0);
+                
+            }
             M:
             scanf("%s",&y);
             if(Player(count)==1)
@@ -345,8 +360,9 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
                     }
                 }
             }
-        if(nbrPionPoseJ1(T2)<3)                  // ---------------------- le gagnant est le 2ème JOUEUR -----------------------
+        if(nbrPionPoseJ1(T2)<3)               // ---------------------- le gagnant est le 2ème JOUEUR -----------------------
         {
+            q:
             system("cls");
             Color(4,0);
             printf("\n\n\t\t\t\t\t\t\t\t            ___________    ____ \n");
@@ -382,8 +398,9 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
             system("cls");
             goto P22;
         }
-        if(nbrPionPoseJ2(T2)<3)                 // ---------------------- le gagnant est le 1er JOUEUR -----------------------
+        if(nbrPionPoseJ2(T2)<3)                  // ---------------------- le gagnant est le 1er JOUEUR -----------------------
         {
+            r:
             system("cls");
             Color(8,0);
             printf("\n\n\t\t\t\t\t\t\t\t            ___________    ____ \n");
@@ -424,13 +441,17 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
 
 
     case 2 :                         //---------------------------------Joueur contre Machine---------------------------------------
+        int r;
+        srand(time(NULL));
+        r=rand%2;
+        count=r;
         system("cls");
         printf("\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t\t\tJoueur 1 entrez votre nom : ");
         scanf("%s",&J1);
         system("cls");
         ff:
         PionPose(T2);
-        if(count<18)
+        if(count<18+r)
         {
             plateau(T,T2);
             p2:
@@ -532,7 +553,7 @@ void menu(char T[24],char T2[24]) // ------------------fonction d'affichage du m
                 }
             count+=1;
         }
-        if(count>17 && nbrPionPoseJ1(T2)>2 && nbrPionPoseJ2(T2)>2)
+        if(count>17+r && nbrPionPoseJ1(T2)>2 && nbrPionPoseJ2(T2)>2)
         {
             L44:
             system("cls");
@@ -1286,7 +1307,7 @@ int cond_deplacer(char y ,char x ,char T[24] ,char T1[24])  //------------------
     }
       else if (y=='x')
     {
-        for (i=0;i<x;i++)
+        for (i=0;i<2;i++)
         {
             if(x==T24[i] && T1[pos]!='*' && T1[pos]!='$')  c = 1;
         }
@@ -2208,39 +2229,362 @@ void PionPoseMACHINE3(char T2[24])
 
 
 
-
-
-
-
-
-
-
-/*int posPion(char *tab, char *x)  // permet de donner la position du pion choisis par l'utilisateur dans le tableau
+int Blockage_Deplacement(char y ,char T[24] ,char T1[24])  //------------------permet de verifier la possibilite de deplacement-------------------
 {
-    int i,j,y;
-    j=strlen(tab);
-    for(i=0;i<j;i++)
+    char T0[2]="jb";
+    char T02[3]="aec";
+    char T33[2]="bo";
+    char T44[2]="ke";
+    char T55[4]="dbhf";
+    char T6[2]="en";
+    char T7[2]="lh";
+    char T8[3]="gei";
+    char T9[2]="hm";
+    char T10[3]="vak";
+    char T11[4]="jdsl";
+    char T12[3]="kgp";
+    char T13[3]="irn";
+    char T14[4]="mfuo";
+    char T15[3]="cxn";
+    char T16[2]="lq";
+    char T17[3]="ptr";
+    char T18[2]="qm";
+    char T19[2]="kt";
+    char T20[4]="sqwu";
+    char T21[2]="tn";
+    char T22[2]="jw";
+    char T23[3]="vtx";
+    char T24[2]="wo";
+    int c=0,pos,i;
+    if(y=='a')
     {
-        if(x==tab[i])
-            y=i;
-            break;
+        for (i=0;i<2;i++)
+        {   
+            pos=posPion(T0[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')
+            {  
+                c = 1;
+                break;
+            }
+        }
     }
-    return y;
-}*/
+    else if(y=='b')
+    {
+        for (i=0;i<3;i++)
+        {
+            pos=posPion(T02[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='c')
+    {
+        for (i=0;i<2;i++)
+        {
+            pos=posPion(T33[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='d')
+    {
+        for (i=0;i<2;i++)
+        {
+            pos=posPion(T44[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='e')
+    {
+        for (i=0;i<4;i++)
+        {
+            pos=posPion(T55[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='f')
+    {
+        for (i=0;i<2;i++)
+        {
+            pos=posPion(T6[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='g')
+    {
+        for (i=0;i<2;i++)
+        {
+            pos=posPion(T7[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='h')
+    {
+        for (i=0;i<3;i++)
+        {
+            pos=posPion(T8[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='i')
+    {
+        for (i=0;i<2;i++)
+        {
+            pos=posPion(T9[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='j')
+    {
+        for (i=0;i<3;i++)
+        {
+            pos=posPion(T10[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='k')
+    {
+        for (i=0;i<4;i++)
+        {
+            pos=posPion(T11[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='l')
+    {
+        for (i=0;i<3;i++)
+        {
+            pos=posPion(T12[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='m')
+    {
+        for (i=0;i<3;i++)
+        {
+            pos=posPion(T13[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='n')
+    {
+        for (i=0;i<4;i++)
+        {
+            pos=posPion(T14[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='o')
+    {
+        for (i=0;i<3;i++)
+        {
+            pos=posPion(T15[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='p')
+    {
+        for (i=0;i<2;i++)
+        {
+            pos=posPion(T16[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='q')
+    {
+        for (i=0;i<3;i++)
+        {
+            pos=posPion(T17[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$') 
+            {
+                c = 1;
+                break;
+            }
+        }   
+    }
+      else if(y=='r')
+    {
+        for (i=0;i<2;i++)
+        {
+            pos=posPion(T18[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='s')
+    {
+        for (i=0;i<2;i++)
+        {
+            pos=posPion(T19[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='t')
+    {
+        for (i=0;i<4;i++)
+        {
+            pos=posPion(T20[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='u')
+    {
+        for (i=0;i<2;i++)
+        {
+            pos=posPion(T21[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='v')
+    {
+        for (i=0;i<2;i++)
+        {
+            pos=posPion(T22[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if(y=='w')
+    {
+        for (i=0;i<3;i++)
+        {
+            pos=posPion(T23[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+      else if (y=='x')
+    {
+        for (i=0;i<2;i++)
+        {
+            pos=posPion(T24[i],T);
+            if(T1[pos]!='*' && T1[pos]!='$')  
+            {
+                c = 1;
+                break;
+            }
+        }
+    }
+    return c;
+}
 
-/*void execute()
+
+
+int Blockage_J1(char T[24] ,char T1[24])    //--------------Permet de verifier si le 1er joueur est bloqué ou non-----------------
 {
-    int i;
-    char a;
-    char plt[]="\n\n\n\n\t\t\t\t\t\t    a----------------------------b----------------------------c\n\t\t\t\t\t\t    |                            |                            |\n\t\t\t\t\t\t    |                            |                            |\n\t\t\t\t\t\t    |                            |                            |\n\t\t\t\t\t\t    |        d-------------------e-------------------f        |\n\t\t\t\t\t\t    |        |                   |                   |        |\n\t\t\t\t\t\t    |        |                   |                   |        |\n\t\t\t\t\t\t    |        |                   |                   |        |\n\t\t\t\t\t\t    |        |                   |                   |        |\n\t\t\t\t\t\t    |        |       g-----------h----------i        |        |\n\t\t\t\t\t\t    |        |       |                      |        |        |\n\t\t\t\t\t\t    |        |       |                      |        |        |\n\t\t\t\t\t\t    |        |       |                      |        |        |\n\t\t\t\t\t\t    |        |       |                      |        |        |\n\t\t\t\t\t\t    |        |       |                      |        |        |\n\t\t\t\t\t\t    j--------k-------l                      m--------n--------o\n\t\t\t\t\t\t    |        |       |                      |        |        |\n\t\t\t\t\t\t    |        |       |                      |        |        |\n\t\t\t\t\t\t    |        |       |                      |        |        |\n\t\t\t\t\t\t    |        |       |                      |        |        |\n\t\t\t\t\t\t    |        |       |                      |        |        |\n\t\t\t\t\t\t    |        |       p-----------q----------r        |        |\n\t\t\t\t\t\t    |        |                   |                   |        |\n\t\t\t\t\t\t    |        |                   |                   |        |\n\t\t\t\t\t\t    |        |                   |                   |        |\n\t\t\t\t\t\t    |        s-------------------t-------------------u        |\n\t\t\t\t\t\t    |                            |                            |\n\t\t\t\t\t\t    |                            |                            |\n\t\t\t\t\t\t    |                            |                            |\n\t\t\t\t\t\t    v----------------------------w----------------------------x";
-    char pion;
-    plateau(T,T2);
-    scanf("%s",&a);
-   // i=posPion(plt,a);
+    int i,c=0;
+    for(i=0;i<24;i++)
+    {
+        if(T1[i]=='$')
+        {
+            if(Blockage_Deplacement(T[i],T,T1)==1)   // pas de problème pour le déplacement
+            {
+                c=1;
+                break;
+            }
+            if(count<18)
+                c=1;
+        }
+    }
+    return c;
+}
 
-    plt[i]='x';              //positionner le pion
-    system("cls");
-    plateau(plt);
-    getch();
 
-}*/
+int Blockage_J2(char T[24] ,char T1[24])       //--------------Permet de verifier si le 2eme joueur est bloqué ou non-----------------
+{
+    int i,c=0;
+    for(i=0;i<24;i++)
+    {
+        if(T1[i]=='*')
+        {
+            if(Blockage_Deplacement(T[i],T,T1)==1)   // pas de problème pour le déplacement
+            {
+                c=1;
+                break;
+            }
+            if(count<18)
+                c=1;
+        }
+    }
+    return c;
+}
+
