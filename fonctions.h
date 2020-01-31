@@ -24,8 +24,13 @@ int Deplacement_Machine(char y,char T[24],char T1[24]);
 void PionPose(char T2[24]);
 void PionPoseMACHINE3(char T2[24]);
 int Connd_Deplacement_Machine(char y,char T[24],char T1[24]);
-//void deplacement(char T[24],char T2[24]);
-//void execute();
+int Blockage_Deplacement(char y ,char T[24] ,char T1[24]);
+int Blockage_J1(char T[24] ,char T1[24]);
+int Blockage_J2(char T[24] ,char T1[24]);
+char Block_MoulinM(char T[24],char T2[24]);
+int nbr_Pion(char Tx[3],char T[24],char T2[24]);
+int nbr_PionM(char Tx[3],char T[24],char T2[24]);
+char Moulin_Machine(char T[24],char T2[24]);
 
 
 #endif // FONCTIONS_H_INCLUDED
