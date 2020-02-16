@@ -31,6 +31,16 @@ char Block_MoulinM(char T[24],char T2[24]);
 int nbr_Pion(char Tx[3],char T[24],char T2[24]);
 int nbr_PionM(char Tx[3],char T[24],char T2[24]);
 char Moulin_Machine(char T[24],char T2[24]);
-
+char captureM(char T[24],char T2[24]);
+char Moulin_Machine(char T[24],char T2[24]);
+char Attaque_depl_libre(char T[24],char T2[24]);
+void joueur_ordinateur(char T[24],char T2[24]);
+void joueur_humain(char T[24],char T2[24]);
+void Moulin_Machine_Moyenne(int i,char T[24],char T2[24]);
+void Moulin_Machine_Facile(int i,char T[24],char T2[24]);
+void Rejouer(char T[24],char T2[24]);
+void YOU();
+void MoulinJ2(int i,char T[24],char T2[24]);
+void MoulinJ1(int i,char T[24],char T2[24]);
 
 #endif // FONCTIONS_H_INCLUDED
