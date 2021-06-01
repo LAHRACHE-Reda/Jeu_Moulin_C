@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1580669293 source:c:\users\hp\desktop\s1\mon dossier\techniques de programmation\jeu_moulin\main.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<string.h>
+	"fonctions.c"
+	"fonctions.h"
+
+1580685282 c:\users\hp\desktop\s1\mon dossier\techniques de programmation\jeu_moulin\fonctions.h
+
+1580686544 c:\users\hp\desktop\s1\mon dossier\techniques de programmation\jeu_moulin\fonctions.c
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<string.h>
+	"fonctions.h"
+

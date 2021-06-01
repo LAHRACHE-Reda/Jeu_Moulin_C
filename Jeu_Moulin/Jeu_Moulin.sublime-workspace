@@ -1,0 +1,189 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"std",
+				"stdio.h\tstandard header"
+			],
+			[
+				"nbr",
+				"nbrB"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 170.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/HP/Desktop/fonctions.c",
+		"/C/Users/HP/Desktop/fonctions.h",
+		"/C/Users/HP/Desktop/maic.c",
+		"/C/Users/HP/Desktop/S1/Mon Dossier/Techniques de programmation/jeu_moulin.c",
+		"/C/Users/HP/Desktop/S1/Mon Dossier/Techniques de programmation/Projet Moulin/programme/fonctions.h",
+		"/C/Users/HP/Documents/GitHub/Jeu_Moulin_C/main.c",
+		"/C/Users/HP/Desktop/S1/Mon Dossier/Techniques de programmation/Projet Moulin/Test/interfaces.h",
+		"/C/Users/HP/Desktop/S1/Mon Dossier/Techniques de programmation/Projet Moulin/Test/interfaces.c",
+		"/C/Users/HP/Desktop/S1/Mon Dossier/Techniques de programmation/Projet Moulin/Test/main.c",
+		"/C/Users/HP/Desktop/hello.exe",
+		"/C/Users/HP/AppData/Roaming/Sublime Text 3/Packages/User/C_RUN.sublime-build",
+		"/C/Users/HP/Desktop/Nouveau document texte.c",
+		"/C/Users/HP/Desktop/test",
+		"/C/Users/HP/Desktop/S1/Mon Dossier/Techniques de programmation/TD_Classe/ProgrammeC/MinGW/lib/libadvapi32.a",
+		"/C/Users/HP/Desktop/S1/Mon Dossier/Techniques de programmation/TD_Classe/ProgrammeC/MinGW/lib/CRT_noglob.o",
+		"/C/Users/HP/Desktop/S1/Mon Dossier/Techniques de programmation/TD_Classe/ProgrammeC/MinGW/lib/CRT_fp10.o",
+		"/C/Users/HP/Desktop/S1/Mon Dossier/Techniques de programmation/TD_Classe/ProgrammeC/MonPremierProg.i"
+	],
+	"find":
+	{
+		"height": 24.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/User/C_RUN.sublime-build",
+	"project": "Jeu_Moulin.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
